@@ -13,3 +13,11 @@ var invalidConfigError = &tracer.Error{
 func IsInvalidConfig(err error) bool {
 	return errors.Is(err, invalidConfigError)
 }
+
+var invalidFlagError = &tracer.Error{
+	Kind: "invalidFlagError",
+}
+
+func IsInvalidFlag(err error) bool {
+	return errors.Is(err, invalidFlagError)
+}

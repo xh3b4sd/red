@@ -3,7 +3,7 @@ package project
 var (
 	description = "Managing gpg messages and rsa keys."
 	gitSHA      = "n/a"
-	name        = "pag"
+	name        = "red"
 	source      = "https://github.com/xh3b4sd/red"
 	version     = "n/a"
 )
