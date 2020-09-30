@@ -49,7 +49,10 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 
 	var err error
 
-	p := pass.MustNew()
+	var p string
+	{
+		p = pass.MustNew()
+	}
 
 	var e *gpg.Encrypter
 	{
