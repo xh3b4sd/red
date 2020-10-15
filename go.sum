@@ -165,6 +165,8 @@ github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69
 github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/xh3b4sd/budget v0.2.0 h1:xqnGRFwrwXW/hJnf5SCatXIVp/iHfC4ZFVYGmYZmT2Q=
 github.com/xh3b4sd/budget v0.2.0/go.mod h1:u4Ci+UNDDCeDNjEOCPYQduvWg+T4G8frIYDxs/YG/ss=
+github.com/xh3b4sd/gpg v0.1.0 h1:II6X32thye0TGIbwYztiij3l6Sb93rsyHPkxySEkE6g=
+github.com/xh3b4sd/gpg v0.1.0/go.mod h1:lbPXtje17I0Hdf7V+ljUKdvYUyjDCpMPlNVUmF5ilKI=
 github.com/xh3b4sd/logger v0.1.2 h1:zEE3obzyrGofvTNbT+T2U654e9XwqmGbzyktdRB1BR8=
 github.com/xh3b4sd/logger v0.1.2/go.mod h1:/mTz2elyBeH3rPq5vEqAJRWYt/6huhY/b3Hrzych2GE=
 github.com/xh3b4sd/random v0.2.0 h1:LTLeb4xDI9Fl8uDZtbbitTKoXidxyrh364xS7O/MthU=
@@ -183,8 +185,8 @@ golang.org/x/crypto v0.0.0-20181029021203-45a5f77698d3/go.mod h1:6SG95UA2DQfeDnf
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
-golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a h1:vclmkQCjlDX5OydZ9wv8rBCcS0QyQY66Mpf/7BZbInM=
-golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
+golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee h1:4yd7jl+vXjalO5ztz6Vc1VADv+S/80LGJmyl1ROJ2AI=
+golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/exp v0.0.0-20190121172915-509febef88a4/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/exp v0.0.0-20190306152737-a1d7652674e8/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/exp v0.0.0-20190510132918-efd6b22b2522/go.mod h1:ZjyILWgesfNpC6sMxTJOJm9Kp84zZh5NQWvqDGG3Qr8=

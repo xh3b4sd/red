@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/xh3b4sd/gpg"
 	"github.com/xh3b4sd/logger"
 	"github.com/xh3b4sd/tracer"
 
-	"github.com/xh3b4sd/red/pkg/gpg"
 	"github.com/xh3b4sd/red/pkg/pass"
 	"github.com/xh3b4sd/red/pkg/rsa"
 )
