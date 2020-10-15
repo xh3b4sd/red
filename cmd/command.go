@@ -7,6 +7,7 @@ import (
 
 	"github.com/xh3b4sd/red/cmd/completion"
 	"github.com/xh3b4sd/red/cmd/decrypt"
+	"github.com/xh3b4sd/red/cmd/encrypt"
 	"github.com/xh3b4sd/red/cmd/generate"
 	"github.com/xh3b4sd/red/cmd/version"
 	"github.com/xh3b4sd/red/pkg/project"
@@ -47,6 +48,18 @@ func New(config Config) (*cobra.Command, error) {
 		}
 
 		decryptCmd, err = decrypt.New(c)
+		if err != nil {
+			return nil, tracer.Mask(err)
+		}
+	}
+
+	var encryptCmd *cobra.Command
+	{
+		c := encrypt.Config{
+			Logger: config.Logger,
+		}
+
+		encryptCmd, err = encrypt.New(c)
 		if err != nil {
 			return nil, tracer.Mask(err)
 		}
@@ -97,6 +110,7 @@ func New(config Config) (*cobra.Command, error) {
 
 		c.AddCommand(completionCmd)
 		c.AddCommand(decryptCmd)
+		c.AddCommand(encryptCmd)
 		c.AddCommand(generateCmd)
 		c.AddCommand(versionCmd)
 	}

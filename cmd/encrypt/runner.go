@@ -1,4 +1,4 @@
-package decrypt
+package encrypt
 
 import (
 	"context"
@@ -35,13 +35,13 @@ func (r *runner) Run(cmd *cobra.Command, args []string) error {
 func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) error {
 	var err error
 
-	var d *gpg.Decrypter
+	var e *gpg.Encrypter
 	{
-		c := gpg.DecrypterConfig{
+		c := gpg.EncrypterConfig{
 			Pass: r.flag.Pass,
 		}
 
-		d, err = gpg.NewDecrypter(c)
+		e, err = gpg.NewEncrypter(c)
 		if err != nil {
 			return tracer.Mask(err)
 		}
@@ -61,7 +61,7 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 
 	var dec []byte
 	{
-		b, err := d.Decrypt(enc)
+		b, err := e.Encrypt(enc)
 		if err != nil {
 			return tracer.Mask(err)
 		}

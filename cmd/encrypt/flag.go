@@ -1,4 +1,4 @@
-package decrypt
+package encrypt
 
 import (
 	"os"
@@ -17,9 +17,9 @@ type flag struct {
 }
 
 func (f *flag) Init(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&f.Input, "input", "i", "", "Input file to read the encrypted GPG message from.")
-	cmd.Flags().StringVarP(&f.Output, "output", "o", "", "Output file to write the decrypted GPG message to.")
-	cmd.Flags().StringVarP(&f.Pass, "pass", "p", "", "Password used for decryption of the GPG message.")
+	cmd.Flags().StringVarP(&f.Input, "input", "i", "", "Input file to read the decrypted GPG message from.")
+	cmd.Flags().StringVarP(&f.Output, "output", "o", "", "Output file to write the encrypted GPG message to.")
+	cmd.Flags().StringVarP(&f.Pass, "pass", "p", "", "Password used for encryption of the GPG message.")
 }
 
 func (f *flag) Validate() error {
@@ -27,14 +27,14 @@ func (f *flag) Validate() error {
 		if f.Input == "" {
 			return tracer.Maskf(invalidFlagError, "-i/--input must not be empty")
 		}
-		if !strings.HasSuffix(f.Input, ".enc") {
-			return tracer.Maskf(invalidFlagError, "-i/--input must have suffix %#q", ".enc")
-		}
 	}
 
 	{
 		if f.Output == "" {
 			return tracer.Maskf(invalidFlagError, "-o/--output must not be empty")
+		}
+		if !strings.HasSuffix(f.Output, ".enc") {
+			return tracer.Maskf(invalidFlagError, "-o/--output must have suffix %#q", ".enc")
 		}
 	}
 

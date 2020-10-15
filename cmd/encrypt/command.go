@@ -1,4 +1,4 @@
-package decrypt
+package encrypt
 
 import (
 	"github.com/spf13/cobra"
@@ -7,18 +7,18 @@ import (
 )
 
 const (
-	name  = "decrypt"
-	short = "Decrypt GPG messages like e.g. encrypted private keys."
-	long  = `Decrypt GPG messages like e.g. encrypted private keys. Following conventions
+	name  = "encrypt"
+	short = "Encrypt GPG messages like e.g. encrypted private keys."
+	long  = `Encrypt GPG messages like e.g. encrypted private keys. Following conventions
 and best practices should be respected, if not programmatically enforced.
 
-    * Input files given by -i/--input must have the ".enc" suffix.
+    * Output files given by -o/--output must have the ".enc" suffix.
 
     * Passwords given by -p/--pass must at least be 64 characters long. If not
       given by command line flag an environment variable RED_GPG_PASS must be
       set in the process environment.
 
-    * Decryption of specific file types like RSA deploy keys do not have to
+    * Encryption of specific file types like RSA deploy keys do not have to
       follow the convention of structured file system layout as described
       below.
 
