@@ -1,6 +1,8 @@
 package decrypt
 
 import (
+	"strings"
+
 	"github.com/spf13/cobra"
 	"github.com/xh3b4sd/tracer"
 )
@@ -18,14 +20,25 @@ func (f *flag) Init(cmd *cobra.Command) {
 }
 
 func (f *flag) Validate() error {
-	if f.Input == "" {
-		return tracer.Maskf(invalidFlagError, "-i/--input must not be empty")
+	{
+		if f.Input == "" {
+			return tracer.Maskf(invalidFlagError, "-i/--input must not be empty")
+		}
+		if !strings.HasSuffix(f.Input, ".enc") {
+			return tracer.Maskf(invalidFlagError, "-i/--input must have suffix %#q", ".enc")
+		}
 	}
-	if f.Output == "" {
-		return tracer.Maskf(invalidFlagError, "-o/--output must not be empty")
+
+	{
+		if f.Output == "" {
+			return tracer.Maskf(invalidFlagError, "-o/--output must not be empty")
+		}
 	}
-	if f.Pass == "" {
-		return tracer.Maskf(invalidFlagError, "-p/--pass must not be empty")
+
+	{
+		if f.Pass == "" {
+			return tracer.Maskf(invalidFlagError, "-p/--pass must not be empty")
+		}
 	}
 
 	return nil

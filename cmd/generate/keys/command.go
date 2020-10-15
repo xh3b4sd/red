@@ -8,7 +8,7 @@ import (
 
 const (
 	name        = "keys"
-	description = "Generate deploy keys for e.g. github workflows."
+	description = "Generate RSA keys for e.g. github workflows."
 )
 
 type Config struct {
