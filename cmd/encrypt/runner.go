@@ -1,8 +1,11 @@
 package encrypt
 
 import (
+	"bufio"
 	"context"
+	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/xh3b4sd/gpg"
@@ -46,8 +49,12 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 		}
 	}
 
-	var enc []byte
-	{
+	var dec []byte
+	if r.flag.Input == "-" {
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		dec = scanner.Bytes()
+	} else {
 		p := r.flag.Input
 
 		b, err := ioutil.ReadFile(p)
@@ -55,23 +62,26 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 			return tracer.Mask(err)
 		}
 
-		enc = b
+		dec = b
 	}
 
-	var dec []byte
+	var enc []byte
 	{
-		b, err := e.Encrypt(enc)
+		b, err := e.Encrypt(dec)
 		if err != nil {
 			return tracer.Mask(err)
 		}
 
-		dec = b
+		// For convenience we want to append a new line at the end of the
+		// encrypted secret. This helps writing GPG messages to files on the
+		// file system upon human inspection.
+		enc = []byte(fmt.Sprintf("%s\n", b))
 	}
 
 	{
 		p := r.flag.Output
 
-		err = ioutil.WriteFile(p, dec, 0600)
+		err = ioutil.WriteFile(p, enc, 0600)
 		if err != nil {
 			return tracer.Mask(err)
 		}

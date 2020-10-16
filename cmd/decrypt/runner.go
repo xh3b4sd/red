@@ -2,6 +2,7 @@ package decrypt
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 
 	"github.com/spf13/cobra"
@@ -65,10 +66,15 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 			return tracer.Mask(err)
 		}
 
-		dec = b
+		// For convenience we want to append a new line at the end of the
+		// decrypted secret. This helps printing plain text secrets to stdout as
+		// well as writing them to files on the file system.
+		dec = []byte(fmt.Sprintf("%s\n", b))
 	}
 
-	{
+	if r.flag.Output == "-" {
+		fmt.Printf("%s", dec)
+	} else {
 		p := r.flag.Output
 
 		err = ioutil.WriteFile(p, dec, 0600)

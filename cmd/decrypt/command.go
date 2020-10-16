@@ -14,6 +14,9 @@ and best practices should be respected, if not programmatically enforced.
 
     * Input files given by -i/--input must have the ".enc" suffix.
 
+    * Output provided by -o/--output can either be a file on the file system or
+      "-" to indicate to print to stdout.
+
     * Passwords given by -p/--pass must at least be 64 characters long. If not
       given by command line flag an environment variable RED_GPG_PASS must be
       set in the process environment.
@@ -34,6 +37,15 @@ as described below.
         ├── pass.enc
         └── user.enc
 
+The example below shows how to decrypt a secret that is printed to stdout.
+
+    red decrypt -i key.enc -o - -p ********
+
+The example below shows how to decrypt the GPG message read from a file on
+the file system. The plain text secret is written to the configured output
+file.
+
+    red decrypt -i key.enc -o key.txt -p ********
 `
 )
 
