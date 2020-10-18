@@ -1,11 +1,9 @@
 package encrypt
 
 import (
-	"bufio"
 	"context"
 	"fmt"
 	"io/ioutil"
-	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/xh3b4sd/gpg"
@@ -21,7 +19,12 @@ type runner struct {
 func (r *runner) Run(cmd *cobra.Command, args []string) error {
 	ctx := context.Background()
 
-	err := r.flag.Validate()
+	err := r.flag.Stdin()
+	if err != nil {
+		return tracer.Mask(err)
+	}
+
+	err = r.flag.Validate()
 	if err != nil {
 		return tracer.Mask(err)
 	}
@@ -50,10 +53,8 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 	}
 
 	var dec []byte
-	if r.flag.Input == "-" {
-		scanner := bufio.NewScanner(os.Stdin)
-		scanner.Scan()
-		dec = scanner.Bytes()
+	if r.flag.inputFromStdin {
+		dec = []byte(r.flag.Input)
 	} else {
 		p := r.flag.Input
 

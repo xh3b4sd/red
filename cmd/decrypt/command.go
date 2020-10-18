@@ -17,16 +17,20 @@ and best practices should be respected, if not programmatically enforced.
     * Output provided by -o/--output can either be a file on the file system or
       "-" to indicate to print to stdout.
 
-    * Passwords given by -p/--pass must at least be 64 characters long. If not
-      given by command line flag an environment variable RED_GPG_PASS must be
-      set in the process environment.
+    * Passwords given by -p/--pass can either be the password string itself or
+      "-" to indicate to read from stdin. If not given by command line flag,
+      an environment variable RED_GPG_PASS must be set in the process
+      environment. Passwords must at least be 64 characters long.
 
     * Decryption of specific file types like RSA deploy keys do not have to
       follow the convention of structured file system layout as described
       below.
 
 Secure configuration management should follow a structured file system layout
-as described below.
+as described below. Usually a private repository should be created for the
+sole purpose of secure configuration management. Secret rotation should be
+implemented to rotate the password used for GPG operations. Secret rotations
+should also be implemented to rotate the actually encrypted secrets.
 
     sec
     ├── aws
@@ -37,7 +41,8 @@ as described below.
         ├── pass.enc
         └── user.enc
 
-The example below shows how to decrypt a secret that is printed to stdout.
+The example below shows how to decrypt the secret data that is printed to
+stdout.
 
     red decrypt -i key.enc -o - -p ********
 
@@ -46,6 +51,13 @@ the file system. The plain text secret is written to the configured output
 file.
 
     red decrypt -i key.enc -o key.txt -p ********
+
+The example below shows how to provide a password via stdin. Upon execution
+of the command below the program will wait for any input made. Once the
+[enter] key is pressed the command stops accepting input and uses the
+provided password to decrypt the secret data.
+
+    red decrypt -i key.enc -o key.txt -p -
 `
 )
 

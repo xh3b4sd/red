@@ -19,7 +19,12 @@ type runner struct {
 func (r *runner) Run(cmd *cobra.Command, args []string) error {
 	ctx := context.Background()
 
-	err := r.flag.Validate()
+	err := r.flag.Stdin()
+	if err != nil {
+		return tracer.Mask(err)
+	}
+
+	err = r.flag.Validate()
 	if err != nil {
 		return tracer.Mask(err)
 	}
@@ -73,7 +78,7 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 	}
 
 	if r.flag.Output == "-" {
-		fmt.Printf("%s", dec)
+		fmt.Printf("-o/--output: %s", dec)
 	} else {
 		p := r.flag.Output
 

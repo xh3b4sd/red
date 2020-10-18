@@ -1,6 +1,8 @@
 package decrypt
 
 import (
+	"bufio"
+	"fmt"
 	"os"
 	"strings"
 
@@ -20,6 +22,17 @@ func (f *flag) Init(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&f.Input, "input", "i", "", "Input file to read the encrypted GPG message from.")
 	cmd.Flags().StringVarP(&f.Output, "output", "o", "", "Output file to write the decrypted GPG message to.")
 	cmd.Flags().StringVarP(&f.Pass, "pass", "p", "", "Password used for decryption of the GPG message.")
+}
+
+func (f *flag) Stdin() error {
+	if f.Pass == "-" {
+		fmt.Print("-p/--pass: ")
+		s := bufio.NewScanner(os.Stdin)
+		s.Scan()
+		f.Pass = s.Text()
+	}
+
+	return nil
 }
 
 func (f *flag) Validate() error {

@@ -1,6 +1,8 @@
 package encrypt
 
 import (
+	"bufio"
+	"fmt"
 	"os"
 	"strings"
 
@@ -14,12 +16,33 @@ type flag struct {
 	Input  string
 	Output string
 	Pass   string
+
+	inputFromStdin bool
 }
 
 func (f *flag) Init(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&f.Input, "input", "i", "", "Input file to read the decrypted GPG message from.")
 	cmd.Flags().StringVarP(&f.Output, "output", "o", "", "Output file to write the encrypted GPG message to.")
 	cmd.Flags().StringVarP(&f.Pass, "pass", "p", "", "Password used for encryption of the GPG message.")
+}
+
+func (f *flag) Stdin() error {
+	if f.Input == "-" {
+		fmt.Print("-i/--input: ")
+		s := bufio.NewScanner(os.Stdin)
+		s.Scan()
+		f.Input = s.Text()
+		f.inputFromStdin = true
+	}
+
+	if f.Pass == "-" {
+		fmt.Print("-p/--pass: ")
+		s := bufio.NewScanner(os.Stdin)
+		s.Scan()
+		f.Pass = s.Text()
+	}
+
+	return nil
 }
 
 func (f *flag) Validate() error {
