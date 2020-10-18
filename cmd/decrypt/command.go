@@ -12,7 +12,11 @@ const (
 	long  = `Decrypt GPG messages like e.g. encrypted private keys. Following conventions
 and best practices should be respected, if not programmatically enforced.
 
-    * Input files given by -i/--input must have the ".enc" suffix.
+    * Input provided by -i/--input can either be a file or directory on the
+      file system. Files must have the ".enc" suffix. Directories will be
+      traversed to find all files having the ".enc" suffix. All found files
+      will be decrypted and serialized into a structured JSON object
+      according to the file system structure.
 
     * Output provided by -o/--output can either be a file on the file system or
       "-" to indicate to print to stdout.
@@ -38,8 +42,21 @@ should also be implemented to rotate the actually encrypted secrets.
     │       ├── id.enc
     │       └── secret.enc
     └── docker
-        ├── pass.enc
-        └── user.enc
+        ├── password.enc
+        ├── registry.enc
+        └── username.enc
+
+When decrypting all secrets within a directory the serialized JSON object
+according to the example file system structure shown above will look like the
+following.
+
+    {
+        "aws.access.id": "...",
+        "aws.access.secret": "...",
+        "docker.password": "...",
+        "docker.registry": "...",
+        "docker.username": "..."
+    }
 
 The example below shows how to decrypt the secret data that is printed to
 stdout.
@@ -58,6 +75,13 @@ of the command below the program will wait for any input made. Once the
 provided password to decrypt the secret data.
 
     red decrypt -i key.enc -o key.txt -p -
+
+The example below shows how to decrypt all secrets within a directory and
+write the serialized JSON object to stdout. Note that the command below
+defines the "-s" flag, which makes it operate in silent mode for scripting
+and suppresses labels.
+
+    red decrypt -i . -o - -p ******** -s
 `
 )
 

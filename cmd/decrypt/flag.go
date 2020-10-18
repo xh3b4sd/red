@@ -10,23 +10,28 @@ import (
 	"github.com/xh3b4sd/tracer"
 
 	"github.com/xh3b4sd/red/pkg/env"
+	"github.com/xh3b4sd/red/pkg/file"
 )
 
 type flag struct {
 	Input  string
 	Output string
 	Pass   string
+	Silent bool
 }
 
 func (f *flag) Init(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&f.Input, "input", "i", "", "Input file to read the encrypted GPG message from.")
 	cmd.Flags().StringVarP(&f.Output, "output", "o", "", "Output file to write the decrypted GPG message to.")
 	cmd.Flags().StringVarP(&f.Pass, "pass", "p", "", "Password used for decryption of the GPG message.")
+	cmd.Flags().BoolVarP(&f.Silent, "silent", "s", false, "Silent mode for scripting to suppress labels.")
 }
 
 func (f *flag) Stdin() error {
 	if f.Pass == "-" {
-		fmt.Print("-p/--pass: ")
+		if !f.Silent {
+			fmt.Print("-p/--pass: ")
+		}
 		s := bufio.NewScanner(os.Stdin)
 		s.Scan()
 		f.Pass = s.Text()
@@ -40,7 +45,7 @@ func (f *flag) Validate() error {
 		if f.Input == "" {
 			return tracer.Maskf(invalidFlagError, "-i/--input must not be empty")
 		}
-		if !strings.HasSuffix(f.Input, ".enc") {
+		if !file.IsDir(f.Input) && !strings.HasSuffix(f.Input, ".enc") {
 			return tracer.Maskf(invalidFlagError, "-i/--input must have suffix %#q", ".enc")
 		}
 	}
