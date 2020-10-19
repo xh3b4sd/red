@@ -3,7 +3,7 @@ module github.com/xh3b4sd/red
 go 1.15
 
 require (
-	github.com/spf13/afero v1.1.2
+	github.com/spf13/afero v1.4.1
 	github.com/spf13/cobra v1.1.0
 	github.com/xh3b4sd/budget v0.2.0
 	github.com/xh3b4sd/gpg v0.1.0
