@@ -48,9 +48,9 @@ func (r *runner) decFromDir(d *gpg.Decrypter) ([]byte, error) {
 	// The first thing we need to do is to lookup the absolut paths of all
 	// encrypted files. The resulting list of files might look like below.
 	//
-	//     /Users/xh3b4sd/projects/xh3b4sd/secret/sec/docker/pass.enc
-	//     /Users/xh3b4sd/projects/xh3b4sd/secret/sec/docker/regi.enc
-	//     /Users/xh3b4sd/projects/xh3b4sd/secret/sec/docker/user.enc
+	//     /Users/xh3b4sd/projects/xh3b4sd/sec/docker/pass.enc
+	//     /Users/xh3b4sd/projects/xh3b4sd/sec/docker/regi.enc
+	//     /Users/xh3b4sd/projects/xh3b4sd/sec/docker/user.enc
 	//
 	var files []string
 	{
@@ -102,7 +102,7 @@ func (r *runner) decFromDir(d *gpg.Decrypter) ([]byte, error) {
 			return nil, tracer.Mask(err)
 		}
 
-		f = strings.TrimPrefix(f, mustAbs(r.flag.Input)+"/sec/")
+		f = strings.TrimPrefix(f, mustAbs(r.flag.Input)+"/")
 		f = strings.TrimSuffix(f, filepath.Ext(f))
 		f = strings.ReplaceAll(f, "/", ".")
 
