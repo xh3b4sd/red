@@ -35,7 +35,7 @@ sole purpose of secure configuration management. Secret rotation should be
 implemented to rotate the password used for GPG operations. Secret rotations
 should also be implemented to rotate the actually encrypted secrets.
 
-    sec
+    .
     ├── aws
     │   └── access
     │       ├── id.enc
@@ -122,7 +122,7 @@ sole purpose of secure configuration management. Secret rotation should be
 implemented to rotate the password used for GPG operations. Secret rotations
 should also be implemented to rotate the actually encrypted secrets.
 
-    sec
+    .
     ├── aws
     │   └── access
     │       ├── id.enc
