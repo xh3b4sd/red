@@ -37,9 +37,8 @@ should also be implemented to rotate the actually encrypted secrets.
 
     .
     ├── aws
-    │   └── access
-    │       ├── id.enc
-    │       └── secret.enc
+    │   ├── accessid.enc
+    │   └── secretid.enc
     └── docker
         ├── password.enc
         ├── registry.enc
@@ -50,8 +49,8 @@ according to the example file system structure shown above will look like the
 following.
 
     {
-        "aws.access.id": "...",
-        "aws.access.secret": "...",
+        "aws.accessid": "...",
+        "aws.secretid": "...",
         "docker.password": "...",
         "docker.registry": "...",
         "docker.username": "..."
@@ -124,12 +123,12 @@ should also be implemented to rotate the actually encrypted secrets.
 
     .
     ├── aws
-    │   └── access
-    │       ├── id.enc
-    │       └── secret.enc
+    │   ├── accessid.enc
+    │   └── secretid.enc
     └── docker
-        ├── pass.enc
-        └── user.enc
+        ├── password.enc
+        ├── registry.enc
+        └── username.enc
 
 The example below shows how to encrypt the secret data that is provided via
 stdin. Upon execution of the command below the program will wait for any

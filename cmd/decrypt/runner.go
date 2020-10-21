@@ -187,6 +187,11 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 	} else {
 		p := r.flag.Output
 
+		err = os.MkdirAll(filepath.Dir(p), os.ModePerm)
+		if err != nil {
+			return tracer.Mask(err)
+		}
+
 		err = ioutil.WriteFile(p, dec, 0600)
 		if err != nil {
 			return tracer.Mask(err)

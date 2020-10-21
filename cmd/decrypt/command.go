@@ -38,9 +38,8 @@ should also be implemented to rotate the actually encrypted secrets.
 
     .
     ├── aws
-    │   └── access
-    │       ├── id.enc
-    │       └── secret.enc
+    │   ├── accessid.enc
+    │   └── secretid.enc
     └── docker
         ├── password.enc
         ├── registry.enc
@@ -51,8 +50,8 @@ according to the example file system structure shown above will look like the
 following.
 
     {
-        "aws.access.id": "...",
-        "aws.access.secret": "...",
+        "aws.accessid": "...",
+        "aws.secretid": "...",
         "docker.password": "...",
         "docker.registry": "...",
         "docker.username": "..."
