@@ -12,6 +12,21 @@ go get github.com/xh3b4sd/red
 
 
 
+### Project Configuration
+
+`red` uses GPG under the hood to encrypt and decrypt secret data. For that
+process to work there is a password required. You want to use passwords
+depending on your use case. Note that passwords must at least be 64 characters
+long. Passwords can be passed as command line flag, read from stdin, or read
+from an environment variable. The latter should be set in your process
+environment.
+
+```
+RED_GPG_PASS
+```
+
+
+
 ### Secret Decryption
 
 ```
