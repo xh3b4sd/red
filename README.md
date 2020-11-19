@@ -4,7 +4,15 @@ Managing gpg messages and rsa keys.
 
 
 
-### Decryption
+### Project Installation
+
+```
+go get github.com/xh3b4sd/red
+```
+
+
+
+### Secret Decryption
 
 ```
 $ red decrypt -h
@@ -94,7 +102,7 @@ Flags:
 
 
 
-### Encryption
+### Secret Encryption
 
 ```
 $ red encrypt -h
