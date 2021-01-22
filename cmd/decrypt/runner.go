@@ -116,7 +116,7 @@ func (r *runner) decFromDir(d *gpg.Decrypter) ([]byte, error) {
 			return nil, tracer.Mask(err)
 		}
 
-		dec = []byte(fmt.Sprintf("%s\n", b))
+		dec = b
 	}
 
 	return dec, nil
@@ -142,10 +142,7 @@ func (r *runner) decFromFile(d *gpg.Decrypter) ([]byte, error) {
 			return nil, tracer.Mask(err)
 		}
 
-		// For convenience we want to append a new line at the end of the
-		// decrypted secret. This helps printing plain text secrets to stdout as
-		// well as writing them to files on the file system.
-		dec = []byte(fmt.Sprintf("%s\n", b))
+		dec = b
 	}
 
 	return dec, nil
