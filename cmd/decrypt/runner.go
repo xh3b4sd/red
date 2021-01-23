@@ -1,6 +1,7 @@
 package decrypt
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -132,7 +133,7 @@ func (r *runner) decFromFile(d *gpg.Decrypter) ([]byte, error) {
 			return nil, tracer.Mask(err)
 		}
 
-		enc = b
+		enc = bytes.TrimSpace(b)
 	}
 
 	var dec []byte
@@ -142,7 +143,7 @@ func (r *runner) decFromFile(d *gpg.Decrypter) ([]byte, error) {
 			return nil, tracer.Mask(err)
 		}
 
-		dec = b
+		dec = bytes.TrimSpace(b)
 	}
 
 	return dec, nil
@@ -180,7 +181,7 @@ func (r *runner) run(ctx context.Context, cmd *cobra.Command, args []string) err
 		if !r.flag.Silent {
 			fmt.Print("-o/--output: ")
 		}
-		fmt.Printf("%s", dec)
+		fmt.Printf("%s\n", dec)
 	} else {
 		p := r.flag.Output
 
